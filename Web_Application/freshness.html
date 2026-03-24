@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavorShelf | Analytics & Reports</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --accent-green: #0DC170;
+            --accent-orange: #FF7600;
+            --accent-red: #F04438;
+        }
+
+        .analytics-container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 25px 35px 60px 25px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-banner {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(13, 97, 78, 0.05) 0%, rgba(34, 197, 94, 0.05) 100%), 
+                        url('analytics_header_bg.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 30px;
+            padding: 40px 40px;
+            margin-bottom: 5px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: #1e293b;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+        }
+
+        .header-content p {
+            font-size: 18px;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+            grid-column: span 2;
+        }
+
+        .stat-card-premium {
+            background: white;
+            border-radius: 24px;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .stat-card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #FF7600, #0DC170);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.5s ease;
+            border-radius: 24px 24px 0 0;
+        }
+
+        .stat-card-premium:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            border-color: rgba(13, 97, 78, 0.1);
+        }
+
+        .stat-card-premium:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-icon-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .stat-card-premium.fresh .stat-icon-box { background: rgba(13, 193, 112, 0.1); color: #0DC170; }
+        .stat-card-premium.soon .stat-icon-box { background: rgba(255, 118, 0, 0.1); color: #FF7600; }
+        .stat-card-premium.expired .stat-icon-box { background: rgba(240, 68, 56, 0.1); color: #F04438; }
+
+        .stat-info h2 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1;
+            margin: 0;
+            color: #1e293b;
+        }
+
+        .stat-info span {
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-grid-premium {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card-premium {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .product-card-premium:hover {
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(13, 97, 78, 0.08);
+            transform: translateX(5px);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .item-name-wrap {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-emoji {
+            font-size: 24px;
+            background: #f8fafc;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+        }
+
+        .item-name-wrap h4 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .badge-soon { background: #FF7600; color: white; padding: 6px 14px; border-radius: 30px; font-size: 12px; font-weight: 800; }
+        .badge-fresh { background: #0DC170; color: white; padding: 6px 14px; border-radius: 30px; font-size: 12px; font-weight: 800; }
+
+        .expiry-info {
+            margin-bottom: 15px;
+        }
+
+        .expiry-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-premium {
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill-premium {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .insight-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .widget-premium {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .widget-premium.waste {
+            background: linear-gradient(135deg, #fff1f2 0%, #fff 100%);
+            border: 1px solid #fecdd3;
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tip-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tip-item {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .tip-item:last-child { border: none; padding-bottom: 0; }
+
+        .tip-icon { color: var(--primary); font-size: 18px; }
+        .tip-text { font-size: 14px; color: #475569; font-weight: 600; line-height: 1.5; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating { animation: float 6s ease-in-out infinite; }
+
+        @media (max-width: 1200px) {
+            .analytics-container { grid-template-columns: 1fr; }
+            .header-banner, .stats-grid { grid-column: span 1; }
+        }
+
+        /* Filter Buttons */
+        .filter-btn {
+            padding: 10px 22px;
+            border-radius: 14px;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(13, 193, 112, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(13, 97, 78, 0.2);
+        }
+    </style>
+</head>
+<body style="background: #F8FAFC;">
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <a href="index" class="sidebar-logo">
+                <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                <span>SavorShelf</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <li class="nav-item"><a href="dashboard" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="products" class="nav-link"><i class="fas fa-shopping-basket"></i> <span>My Products</span></a></li>
+                <li class="nav-item"><a href="scan" class="nav-link"><i class="fas fa-expand"></i> <span>Scan & Track</span></a></li>
+                <li class="nav-item"><a href="freshness" class="nav-link active"><i class="fas fa-chart-line"></i> <span>Analytics</span></a></li>
+                <li class="nav-item"><a href="settings" class="nav-link"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="javascript:void(0)" class="nav-link logout-btn" onclick="app.logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-view" style="padding: 0; margin-left: 280px; background: #f8fafc; overflow-x: hidden; max-width: none;">
+            
+            <div class="analytics-container">
+                
+                <!-- Header Banner -->
+                <header class="header-banner anim-card d-0">
+                    <div class="header-content">
+                        <h1>Freshness Analytics</h1>
+                        <p>Real-time insights into your pantry's health and sustainability.</p>
+                    </div>
+                </header>
+
+                <!-- Premium Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card-premium fresh anim-card d-1">
+                        <div class="stat-icon-box"><i class="fas fa-shield-halved"></i></div>
+                        <div class="stat-info">
+                            <h2 id="peak-freshness-count">0</h2>
+                            <span>Peak Freshness</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-premium soon anim-card d-2">
+                        <div class="stat-icon-box"><i class="fas fa-hourglass-start"></i></div>
+                        <div class="stat-info">
+                            <h2 id="use-soon-count">0</h2>
+                            <span>Use Soon</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-premium expired anim-card d-3">
+                        <div class="stat-icon-box"><i class="fas fa-calendar-xmark"></i></div>
+                        <div class="stat-info">
+                            <h2 id="expired-count">0</h2>
+                            <span>Expired</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Freshness Section -->
+                <section class="inventory-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <h3 style="font-size: 24px; font-weight: 800; color: #1e293b; margin: 0;">Inventory Freshness Level</h3>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="filter-btn active" onclick="app.filterInventory('all', this)">All Items</button>
+                            <button class="filter-btn" onclick="app.filterInventory('expiring', this)">Expiring Today</button>
+                        </div>
+                    </div>
+
+                    <div class="product-grid-premium">
+                        <!-- Rendered by JS -->
+                    </div>
+                </section>
+
+                <!-- Sidebar Insights -->
+                <aside class="insight-sidebar">
+                    
+                    <!-- Waste Impact Widget -->
+                    <div class="widget-premium waste anim-card d-2">
+                        <div class="widget-title" style="color: #BE123C;">
+                            <i class="fas fa-trash-can"></i> Waste Impact
+                        </div>
+                        <p id="waste-impact-text" style="font-size: 15px; color: #BE123C; line-height: 1.6; font-weight: 600; margin-bottom: 25px;">
+                            Analyzing your pantry sustainability...
+                        </p>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span id="consumed-pct-text" style="font-size: 13px; font-weight: 800; color: #0ACF83;">Consumed: 0%</span>
+                            <span id="wasted-pct-text" style="font-size: 13px; font-weight: 800; color: #F44336;">Wasted: 0%</span>
+                        </div>
+                        <div style="width: 100%; height: 10px; background: #fee2e2; border-radius: 5px; overflow: hidden; display: flex;">
+                            <div id="waste-progress-fill" style="width: 0%; height: 100%; background: #0ACF83; transition: width 1s ease;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Freshness Tips Widget -->
+                    <div class="widget-premium anim-card d-3">
+                        <div class="widget-title">
+                            <i class="fas fa-lightbulb" style="color: #fbbf24;"></i> Smart Storage
+                        </div>
+                        <div class="tip-list">
+                            <div class="tip-item">
+                                <div class="tip-icon"><i class="fas fa-box-open"></i></div>
+                                <div class="tip-text">Store leafy greens in airtight glass containers.</div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-icon"><i class="fas fa-arrows-split-up-and-left"></i></div>
+                                <div class="tip-text">Keep ethylene-producers (apples) away from others.</div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-icon"><i class="fas fa-thermometer-half"></i></div>
+                                <div class="tip-text">Ensure fridge temp is consistent (1-4°C).</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </aside>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard"><i class="fas fa-th-large"></i></a>
+        <a href="products"><i class="fas fa-shopping-basket"></i></a>
+        <a href="scan" style="background: var(--primary-gradient); width: 54px; height: 54px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-top: -30px; box-shadow: 0 10px 20px rgba(13, 97, 78, 0.3);"><i class="fas fa-plus"></i></a>
+        <a href="freshness" class="active"><i class="fas fa-chart-line"></i></a>
+        <a href="settings"><i class="fas fa-cog"></i></a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

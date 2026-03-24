@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavorShelf | Product Details</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @keyframes floatUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .anim-card {
+            opacity: 0;
+            animation: floatUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        .d-0 { animation-delay: 0.05s; }
+        .d-1 { animation-delay: 0.15s; }
+        .d-2 { animation-delay: 0.25s; }
+        .d-3 { animation-delay: 0.35s; }
+    </style>
+</head>
+<body style="background: #F8FAFC;">
+
+    <div class="app-container">
+        <!-- Modern Sidebar -->
+        <aside class="sidebar">
+            <a href="index" class="sidebar-logo">
+                <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                <span>SavorShelf</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <li class="nav-item"><a href="dashboard" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="products" class="nav-link active"><i class="fas fa-shopping-basket"></i> <span>My Products</span></a></li>
+                <li class="nav-item"><a href="scan" class="nav-link"><i class="fas fa-expand"></i> <span>Scan & Track</span></a></li>
+                <li class="nav-item"><a href="freshness" class="nav-link"><i class="fas fa-chart-line"></i> <span>Analytics</span></a></li>
+                <li class="nav-item"><a href="settings" class="nav-link"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="javascript:void(0)" class="nav-link logout-btn" onclick="app.logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main View -->
+        <main class="main-view" style="padding: 40px 45px; min-height: 100vh;">
+            
+            <header class="anim-card d-0" style="margin-bottom: 35px; width: 100%; max-width: 1000px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 44px; height: 44px; border-radius: 50%; background: white; border: 1px solid #E2E8F0; color: #0D614E; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.02);">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div>
+                        <h1 style="font-size: 28px; font-weight: 800; color: #1e293b; letter-spacing: -0.5px; margin: 0 0 4px 0;">Product Overview</h1>
+                        <p style="color: #64748b; font-size: 14px; margin: 0;">Detailed freshness and storage info.</p>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div style="display: flex; gap: 12px;">
+                    <button id="delete-product-btn" style="padding: 12px 20px; border-radius: 12px; font-size: 15px; font-weight: 700; background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='#ffe4e6'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#fff1f2'; this.style.transform='translateY(0)'">
+                        <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                    <button id="consumed-btn" style="padding: 12px 28px; border-radius: 12px; font-size: 15px; font-weight: 700; background: #0D614E; color: white; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 20px rgba(13, 97, 78, 0.2);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 15px 30px rgba(13, 97, 78, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 20px rgba(13, 97, 78, 0.2)'">
+                        <i class="fas fa-check-circle"></i> Consumed
+                    </button>
+                </div>
+            </header>
+
+            <div style="max-width: 1000px; margin: 0 auto; padding-bottom: 40px;">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 30px;">
+                    <!-- Left: Product Image & Status -->
+                    <div class="anim-card d-1" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div style="background: white; border-radius: 20px; padding: 15px; border: 1px solid #E2E8F0; box-shadow: 0 15px 40px rgba(0,0,0,0.03);">
+                            <div style="width: 100%; height: 350px; border-radius: 16px; overflow: hidden; position: relative; background: #f8fafc; display: flex; align-items: center; justify-content: center;">
+                                <img id="product-img" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                                <div id="product-status-badge" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 800; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                    <i class="fas fa-circle" style="font-size: 10px; margin-right: 5px;"></i> <span id="product-status-text"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Freshness Meter -->
+                        <div style="background: white; border-radius: 20px; padding: 25px; border: 1px solid #E2E8F0; box-shadow: 0 15px 40px rgba(0,0,0,0.03);">
+                            <h3 style="font-size: 16px; font-weight: 800; color: #1e293b; margin: 0 0 15px 0; display: flex; align-items: center; justify-content: space-between;">
+                                Freshness Level 
+                                <span id="product-progress-pct" style="font-size: 20px;"></span>
+                            </h3>
+                            <div style="width: 100%; height: 12px; background: #F1F5F9; border-radius: 10px; overflow: hidden; margin-bottom: 12px;">
+                                <div id="product-progress-fill" style="width: 0%; height: 100%; border-radius: 10px; transition: 1s ease-out;"></div>
+                            </div>
+                            <p id="product-advice" style="font-size: 13px; color: #64748b; margin: 0; font-weight: 500; line-height: 1.5;"></p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Info Details -->
+                    <div class="anim-card d-2" style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Primary Details -->
+                        <div style="background: white; border-radius: 20px; padding: 40px; border: 1px solid #E2E8F0; box-shadow: 0 15px 40px rgba(0,0,0,0.03);">
+                            <div id="product-cat-tag" style="display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px;"></div>
+                            <h2 id="product-name" style="font-size: 36px; font-weight: 800; color: #1e293b; margin: 0 0 10px 0; letter-spacing: -1px;"></h2>
+                            <p id="product-meta" style="font-size: 15px; color: #64748b; font-weight: 500; margin: 0 0 30px 0;"></p>
+                            
+                            <div style="width: 100%; height: 1px; background: #E2E8F0; margin-bottom: 30px;"></div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 35px;">
+                                <!-- Storage -->
+                                <div>
+                                    <span style="display: block; font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Storage Location</span>
+                                    <div style="display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 800; color: #1e293b;">
+                                        <div style="width: 40px; height: 40px; background: rgba(13, 97, 78, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fas fa-snowflake" style="color: #0D614E; font-size: 18px;"></i>
+                                        </div>
+                                        <span id="product-loc"></span>
+                                    </div>
+                                </div>
+                                <!-- Expiry Date -->
+                                <div>
+                                    <span style="display: block; font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Est. Expiry Date</span>
+                                    <div style="display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 800;">
+                                        <div id="expiry-icon-box" style="width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fas fa-calendar-times" style="font-size: 18px;"></i>
+                                        </div>
+                                        <span id="product-expiry-val"></span>
+                                    </div>
+                                </div>
+                                <!-- Added Date -->
+                                <div>
+                                    <span style="display: block; font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Date Added</span>
+                                    <div style="display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 700; color: #334155;">
+                                        <div style="width: 40px; height: 40px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fas fa-history" style="color: #64748b; font-size: 18px;"></i>
+                                        </div>
+                                        <span id="product-added"></span>
+                                    </div>
+                                </div>
+                                <!-- Quantity -->
+                                <div>
+                                    <span style="display: block; font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Units</span>
+                                    <div style="display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 700; color: #334155;">
+                                        <div style="width: 40px; height: 40px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                            <i class="fas fa-box" style="color: #64748b; font-size: 18px;"></i>
+                                        </div>
+                                        1 Pack (Approx. 20% left)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Smart Recommendations -->
+                        <div class="anim-card d-3" style="background: linear-gradient(135deg, #FFF7ED, #FFEDD5); border-radius: 20px; padding: 25px; border: 1px solid rgba(234, 88, 12, 0.2); box-shadow: 0 10px 20px rgba(234, 88, 12, 0.05);">
+                            <h3 style="font-size: 16px; font-weight: 800; color: #9A3412; margin: 0 0 12px 0; display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-magic"></i> AI Storage Tip
+                            </h3>
+                            <p id="ai-tip" style="font-size: 14px; color: #431407; font-weight: 500; line-height: 1.6; margin: 0;">
+                                For better longevity, keep this item toward the middle shelf where the temperature is most stable.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard"><i class="fas fa-th-large"></i></a>
+        <a href="products" class="active"><i class="fas fa-shopping-basket"></i></a>
+        <a href="scan" style="background: var(--primary-gradient); width: 54px; height: 54px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-top: -30px; box-shadow: 0 10px 20px rgba(13, 97, 78, 0.3);"><i class="fas fa-plus"></i></a>
+        <a href="freshness"><i class="fas fa-chart-line"></i></a>
+        <a href="settings"><i class="fas fa-cog"></i></a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

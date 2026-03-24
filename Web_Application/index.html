@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavorShelf | Smart Expiry Detection & Freshness Estimation</title>
+    <meta name="description"
+        content="SavorShelf uses AI-powered vision technology to track your groceries, reduce waste, and manage your pantry effortlessly.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="landing-page">
+
+    <header class="landing-header">
+        <div class="landing-container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="SavorShelf logo" class="logo-img">
+                <span>SavorShelf</span>
+            </div>
+            <nav class="landing-nav">
+                <ul>
+                    <li><a href="#home" class="nav-link-item active">Home</a></li>
+                    <li><a href="#vision" class="nav-link-item">Vision</a></li>
+                    <li><a href="#features" class="nav-link-item">Features</a></li>
+                    <li><a href="#preview" class="nav-link-item">Preview</a></li>
+                    <li><a href="#about" class="nav-link-item">About</a></li>
+                    <li class="nav-auth-buttons">
+                        <a href="javascript:void(0)" onclick="openAuthModal('register')" class="nav-signup">Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="landing-hero" id="home">
+            <div class="landing-container">
+                <div class="hero-content">
+                    <h1>Freshness at your <br><span>Fingertips</span></h1>
+                    <p>Smart pantry management for the modern home. Our AI-powered vision technology tracks your
+                        groceries effortlessly so you can reduce waste and eat better.</p>
+                    <div class="hero-btns">
+                        <a href="javascript:void(0)" onclick="openAuthModal('register')" class="btn-primary">Get Started <i class="fas fa-arrow-right"
+                                style="margin-left: 6px;"></i></a>
+                        <div class="hero-badges">
+                            <span class="hero-badge">
+                                <span class="badge-icon icon-alert"><i class="fas fa-microchip"></i></span>
+                                AI Freshness
+                            </span>
+                            <span class="hero-badge">
+                                <span class="badge-icon icon-list"><i class="fas fa-shopping-cart"></i></span> Smart
+                                Lists
+                            </span>
+                        </div>
+                    </div>
+                    <p class="login-link">Already have an account? <a href="javascript:void(0)" onclick="openAuthModal('login')">Sign in</a></p>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/index_image_new.png" alt="SavorShelf AI Vision" class="hero-img-main">
+                </div>
+            </div>
+        </section>
+
+        <!-- Freshness Metrics Section -->
+        <section class="landing-metric">
+            <div class="metric-bg-curves">
+                <svg width="100%" height="100%" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="xMidYMid slice">
+                    <!-- Echo circles mimicking tracking / scanning focus -->
+                    <circle cx="200" cy="500" r="300" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.1"
+                        stroke-dasharray="8 12" />
+                    <circle cx="200" cy="500" r="450" stroke="#10B981" stroke-width="1.0" stroke-opacity="0.08" />
+                    <circle cx="1300" cy="100" r="350" stroke="#10B981" stroke-width="1.2" stroke-opacity="0.1" />
+                    <circle cx="1300" cy="100" r="500" stroke="#10B981" stroke-width="0.8" stroke-opacity="0.05"
+                        stroke-dasharray="15 20" />
+
+                    <!-- Elegant overlapping waves distinct from the reference -->
+                    <path d="M -100 200 C 300 100, 600 500, 1500 350" stroke="#10B981" stroke-width="1.5"
+                        stroke-opacity="0.15" />
+                    <path d="M -100 280 C 400 380, 800 150, 1500 450" stroke="#10B981" stroke-width="0.8"
+                        stroke-opacity="0.2" />
+                </svg>
+            </div>
+
+            <div class="landing-container metric-content">
+                <h2>Track freshness.<br><span>Minimize waste.</span></h2>
+                <p>SavorShelf continuously monitors your pantry's lifecycle metrics, enabling you to optimize your
+                    grocery consumption and drastically cut down on food waste every single month.</p>
+            </div>
+
+            <!-- Floating Images -->
+            <img src="assets/metric_avocado.png" alt="Fresh Produce" class="metric-float img-main-left">
+            <img src="assets/metric_tomato.png" alt="Fresh Tomato" class="metric-float img-main-top-right">
+            <img src="assets/metric_avocado.png" alt="Fresh Produce" class="metric-float img-main-bottom-right">
+
+            <!-- Tiny background floaters -->
+            <img src="assets/metric_tomato.png" class="metric-float tiny-tomato-1" alt="">
+            <img src="assets/metric_tomato.png" class="metric-float tiny-tomato-2" alt="">
+            <div class="metric-float tiny-leaf-1">🌿</div>
+            <div class="metric-float tiny-leaf-2">🍃</div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="landing-features" id="vision">
+            <div class="landing-container">
+                <div class="section-title">
+                    <h2>Powered by Intelligent Vision</h2>
+                    <p>The core features that make SavorShelf your essential kitchen companion.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <img src="assets/freshness.png" alt="AI Freshness" class="feature-img">
+                        <h3>AI-Powered Freshness</h3>
+                        <p>Our smart vision technology tracks your groceries effortlessly. Simply snap a photo to keep
+                            tabs on shelf life.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="img-wrapper">
+                            <img src="assets/expiry.png" alt="Expiry Detection" class="feature-img">
+                            <div class="overlay-tags">
+                                <span class="tag-eat">Eat Soon</span>
+                                <span class="tag-expired">Expired</span>
+                            </div>
+                        </div>
+                        <h3>Automated Expiry Detection</h3>
+                        <p>Our advanced AI instantly identifies expiry dates and estimates freshness levels. Say goodbye
+                            to forgotten food.</p>
+                    </div>
+                    <div class="feature-card">
+                        <img src="assets/tracking.png" alt="Smart Tracking" class="feature-img">
+                        <h3>Smart Grocery Tracking</h3>
+                        <p>Inventory your kitchen automatically. Get a comprehensive dashboard of what you have and what
+                            you need.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="landing-overview" id="features">
+            <div class="landing-container">
+                <div class="section-title">
+                    <h2 style="font-size: 3rem;">Features</h2>
+                    <p style="max-width: 600px; margin: 0 auto;">A comprehensive showcase of SavorShelf's core features. Modern pantry
+                        management through AI-powered vision and automated expiry detection.</p>
+                </div>
+                <div class="overview-grid">
+                    <div class="screen-card">
+                        <div class="screen-mock">
+                            <img src="assets/mockup1.png" alt="Welcome Screen">
+                        </div>
+                        <h4>Welcome Screen</h4>
+                        <p>The main entry point featuring the brand value proposition and call to action.</p>
+                    </div>
+                    <div class="screen-card">
+                        <div class="screen-mock">
+                            <img src="assets/mockup2.png" alt="Freshness Overview">
+                        </div>
+                        <h4>Freshness Overview</h4>
+                        <p>Visual dashboard showing the current status of pantry items and fresh produce.</p>
+                    </div>
+                    <div class="screen-card">
+                        <div class="screen-mock">
+                            <img src="assets/mockup3.png" alt="AI Vision Feature">
+                        </div>
+                        <h4>AI Vision Feature</h4>
+                        <p>Introduction to smart vision technology for effortless grocery tracking.</p>
+                    </div>
+                    <div class="screen-card">
+                        <div class="screen-mock">
+                            <img src="assets/mockup4.png" alt="Expiry Detection">
+                        </div>
+                        <h4>Expiry Detection</h4>
+                        <p>Real-time overlay system identifying expiry dates and freshness levels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preview Section -->
+        <section class="landing-app-preview" id="preview">
+            <div class="landing-container">
+                <div class="app-preview-header">
+                    <h2>What's waiting for you on the app?</h2>
+                    <p>Our app is packed with features that enable you to experience smart kitchen management like never
+                        before.</p>
+                </div>
+
+                <div class="app-preview-canvas">
+                    <!-- Left Grid -->
+                    <div class="side-grid left-side-grid">
+                        <div class="floating-col offset-down">
+                            <div class="floating-tile tile-outer-top">
+                                <div class="tile-icon icon-blue"><i class="fas fa-camera"></i></div><span>Quick
+                                    Scan</span>
+                            </div>
+                            <div class="floating-tile tile-outer-bottom">
+                                <div class="tile-icon icon-orange"><i class="fas fa-apple-whole"></i></div><span>Fresh
+                                    Produce</span>
+                            </div>
+                        </div>
+                        <div class="floating-col offset-up">
+                            <div class="floating-tile tile-inner-top">
+                                <div class="tile-icon icon-green"><i class="fas fa-box-open"></i></div><span>Packaged
+                                    Scans</span>
+                            </div>
+                            <div class="floating-tile tile-inner-bottom">
+                                <div class="tile-icon icon-red"><i class="fas fa-lightbulb"></i></div><span>Freshness
+                                    Tips</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center Phone -->
+                    <div class="center-phone">
+                        <img src="assets/dashboard.png" alt="SavorShelf Actual App Dashboard"
+                            onerror="this.src='assets/phone_mockup.png';">
+                        <!-- Floating badge over phone -->
+                        <div class="floating-tile center-tile">
+                            <div class="tile-icon icon-pink"><i class="fas fa-eye"></i></div>
+                            <span>Pantry at a Glance</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Grid -->
+                    <div class="side-grid right-side-grid">
+                        <div class="floating-col offset-up">
+                            <div class="floating-tile tile-inner-top">
+                                <div class="tile-icon icon-purple"><i class="fas fa-clock-rotate-left"></i></div>
+                                <span>Recent Items</span>
+                            </div>
+                            <div class="floating-tile tile-inner-bottom">
+                                <div class="tile-icon icon-yellow"><i class="fas fa-shield-halved"></i></div><span>Use
+                                    Soon</span>
+                            </div>
+                        </div>
+                        <div class="floating-col offset-down">
+                            <div class="floating-tile tile-outer-top">
+                                <div class="tile-icon icon-cyan"><i class="fas fa-circle-exclamation"></i></div>
+                                <span>Expired View</span>
+                            </div>
+                            <div class="floating-tile tile-outer-bottom">
+                                <div class="tile-icon icon-teal"><i class="fas fa-leaf"></i></div><span>Fresh
+                                    View</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="landing-footer" id="about">
+        <div class="landing-container footer-main">
+            <div class="footer-about">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="SavorShelf logo" class="logo-img">
+                    <span style="font-size: 1.5rem; font-weight: 800; color: white;">SavorShelf</span>
+                </div>
+                <p>Smart pantry management for the modern home. Our mission is to effortlessly assist households in
+                    reducing food waste and eating better through the power of intelligent vision technology.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links-group">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#vision">Vision</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#preview">Preview</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-group">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="openAuthModal('login')">Documentation</a></li>
+                    <li><a href="#features">Design System</a></li>
+                    <li><a href="#vision">Help Center</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-group">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#home">Privacy Policy</a></li>
+                    <li><a href="#home">Terms of Service</a></li>
+                    <li><a href="#home">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="landing-container footer-bottom">
+            <p class="copyright">&copy; 2026 SavorShelf. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Beautiful Auth Modal Overlay -->
+    <div id="auth-modal-overlay" class="modal-overlay" style="display: none;" onclick="closeAuthModal(true)">
+        <div class="auth-modal-card" onclick="event.stopPropagation()">
+            <button class="close-modal-btn" onclick="closeAuthModal(true)"><i class="fas fa-times"></i></button>
+            <div class="auth-modal-tabs">
+                <button id="tab-login" class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+                <button id="tab-register" class="auth-tab" onclick="switchAuthTab('register')">Sign Up</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="form-login" class="auth-modal-form active-form" onsubmit="event.preventDefault(); handleModalLogin();">
+                <div class="auth-modal-header">
+                    <h2 style="font-weight: 800; font-size: 28px; line-height: 1.2; color: var(--text-primary);">Welcome back</h2>
+                    <p style="margin-bottom: 25px; font-size: 14px; color: var(--text-muted);">Enter your details to access SavorShelf.</p>
+                </div>
+                <div class="form-group web-auth-group">
+                    <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Email Address</label>
+                    <div class="input-wrapper web-auth-input">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="modal-login-email" placeholder="you@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group web-auth-group">
+                    <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Password</label>
+                    <div class="input-wrapper web-auth-input with-eye">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="modal-login-password" placeholder="********" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('modal-login-password', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <p style="text-align: right; margin-top: 10px;">
+                        <a href="javascript:void(0)" onclick="switchAuthTab('forgot')" style="color: var(--primary); font-size: 12px; font-weight: 700;">Forgot Password?</a>
+                    </p>
+                </div>
+                <button type="submit" class="auth-btn web-auth-submit" id="modal-login-submit" style="margin-top: 15px; width: 100%;">Sign In</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="form-register" class="auth-modal-form" style="display: none;" onsubmit="event.preventDefault(); handleModalRegister();">
+                <div class="auth-modal-header">
+                    <h2 style="font-weight: 800; font-size: 28px; line-height: 1.2; color: var(--text-primary);">Create Account</h2>
+                    <p style="margin-bottom: 25px; font-size: 14px; color: var(--text-muted);">Join SavorShelf to manage your pantry.</p>
+                </div>
+                <div class="form-group web-auth-group">
+                    <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Full Name</label>
+                    <div class="input-wrapper web-auth-input">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="modal-reg-name" placeholder="John Doe" required>
+                    </div>
+                </div>
+                <div class="form-group web-auth-group">
+                    <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Email Address</label>
+                    <div class="input-wrapper web-auth-input">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="modal-reg-email" placeholder="you@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group web-auth-group">
+                    <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Password</label>
+                    <div class="input-wrapper web-auth-input with-eye">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="modal-reg-password" placeholder="********" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('modal-reg-password', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group web-auth-group" style="margin-bottom: 10px;">
+                    <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Confirm Password</label>
+                    <div class="input-wrapper web-auth-input with-eye">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="modal-reg-confirm" placeholder="********" required>
+                        <button type="button" class="password-toggle" onclick="togglePasswordVisibility('modal-reg-confirm', this)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn web-auth-submit" id="modal-reg-submit" style="margin-top: 15px; width: 100%;">Create Account</button>
+            </form>
+
+            <!-- Forgot Password Flow -->
+            <div id="form-forgot" class="auth-modal-form" style="display: none;">
+                <!-- Step 1: Email -->
+                <div id="modal-step-forgot" style="display: block;">
+                    <div class="auth-modal-header" style="text-align: center;">
+                        <i class="fas fa-lock" style="font-size: 32px; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h2 style="font-weight: 800; font-size: 26px; line-height: 1.2; color: var(--text-primary);">Forgot Password?</h2>
+                        <p style="margin-bottom: 25px; font-size: 14px; color: var(--text-muted); padding: 0 10px;">Enter your email to receive an OTP.</p>
+                    </div>
+                    <div class="form-group web-auth-group" style="margin-bottom: 15px;">
+                        <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Email Address</label>
+                        <div class="input-wrapper web-auth-input">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="modal-otp-email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <button class="auth-btn web-auth-submit" id="btn-modal-send-otp" onclick="sendModalOtp()" style="margin-top: 10px; width: 100%;">Send OTP</button>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color: var(--text-secondary); font-size: 13px; font-weight: 600;"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> Back to Login</a>
+                    </div>
+                </div>
+
+                <!-- Step 2: Verify OTP -->
+                <div id="modal-step-verify" style="display: none;">
+                    <div class="auth-modal-header" style="text-align: center;">
+                        <i class="fas fa-check-circle" style="font-size: 32px; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h2 style="font-weight: 800; font-size: 26px; line-height: 1.2; color: var(--text-primary);">Verify OTP</h2>
+                        <p id="modal-otp-subtitle" style="margin-bottom: 25px; font-size: 14px; color: var(--text-muted);">Enter the 4-digit code sent to your email.</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                        <input type="text" maxlength="1" class="modal-otp-input" style="width: 50px; height: 50px; text-align: center; font-size: 20px; font-weight: 700; border-radius: 12px; border: 1px solid #e0e0e0; background: #fafafa;" onkeyup="moveModalFocus(this, 1)">
+                        <input type="text" maxlength="1" class="modal-otp-input" style="width: 50px; height: 50px; text-align: center; font-size: 20px; font-weight: 700; border-radius: 12px; border: 1px solid #e0e0e0; background: #fafafa;" onkeyup="moveModalFocus(this, 2)">
+                        <input type="text" maxlength="1" class="modal-otp-input" style="width: 50px; height: 50px; text-align: center; font-size: 20px; font-weight: 700; border-radius: 12px; border: 1px solid #e0e0e0; background: #fafafa;" onkeyup="moveModalFocus(this, 3)">
+                        <input type="text" maxlength="1" class="modal-otp-input" style="width: 50px; height: 50px; text-align: center; font-size: 20px; font-weight: 700; border-radius: 12px; border: 1px solid #e0e0e0; background: #fafafa;" onkeyup="moveModalFocus(this, 4)">
+                    </div>
+                    <!-- OTP Timer -->
+                    <div id="modal-otp-timer-wrap" style="text-align: center; margin-bottom: 20px; font-weight: 700; color: #64748b; font-size: 14px;">
+                        Your OTP ends in <span id="modal-otp-timer" style="color: #BE123C;">2:00</span>
+                    </div>
+                    <button class="auth-btn web-auth-submit" id="btn-modal-verify-otp" onclick="verifyModalOtp()" style="margin-top: 10px; width: 100%;">Verify Code</button>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="javascript:void(0)" onclick="goModalStep('forgot')" style="color: var(--text-secondary); font-size: 13px; font-weight: 600;"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> Back</a>
+                    </div>
+                </div>
+
+                <!-- Step 3: Reset Password -->
+                <div id="modal-step-reset" style="display: none;">
+                    <div class="auth-modal-header" style="text-align: center;">
+                        <i class="fas fa-shield-alt" style="font-size: 32px; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h2 style="font-weight: 800; font-size: 26px; line-height: 1.2; color: var(--text-primary);">Reset Password</h2>
+                        <p style="margin-bottom: 25px; font-size: 14px; color: var(--text-muted);">Create a new password.</p>
+                    </div>
+                    <div class="form-group web-auth-group" style="margin-bottom: 15px;">
+                        <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">New Password</label>
+                        <div class="input-wrapper web-auth-input with-eye">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="modal-new-password" placeholder="********" required>
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility('modal-new-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group web-auth-group" style="margin-bottom: 15px;">
+                        <label style="font-size:13px; font-weight:700; display:block; margin-bottom:6px; color:var(--text-secondary);">Confirm Password</label>
+                        <div class="input-wrapper web-auth-input with-eye">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="modal-confirm-password" placeholder="********" required>
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility('modal-confirm-password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="auth-btn web-auth-submit" id="btn-modal-reset-pwd" onclick="resetModalPassword()" style="margin-top: 10px; width: 100%;">Reset Password</button>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="javascript:void(0)" onclick="switchAuthTab('login')" style="color: var(--text-secondary); font-size: 13px; font-weight: 600;"><i class="fas fa-arrow-left" style="margin-right:5px;"></i> Cancel</a>
+                    </div>
+                </div>
+
+                <!-- Step 4: Success -->
+                <div id="modal-step-success" style="display: none; text-align: center;">
+                    <div style="background: #E8F5E9; margin: 0 auto 20px; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #439A6B;">
+                        <i class="fas fa-check" style="font-size: 40px;"></i>
+                    </div>
+                    <h2 style="font-weight: 800; font-size: 26px; line-height: 1.2; color: var(--text-primary);">All Set!</h2>
+                    <p style="margin-bottom: 25px; font-size: 14px; color: var(--text-muted); padding: 0 10px;">Your password has been successfully reset. You can now sign in.</p>
+                    <button class="auth-btn web-auth-submit" onclick="switchAuthTab('login')" style="margin-top: 10px; width: 100%;">Back to Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function openAuthModal(type) {
+            const overlay = document.getElementById('auth-modal-overlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('visible'), 10);
+            switchAuthTab(type);
+        }
+
+        function closeAuthModal(force = false) {
+            const overlay = document.getElementById('auth-modal-overlay');
+            overlay.classList.remove('visible');
+            setTimeout(() => overlay.style.display = 'none', 300);
+        }
+
+        // Global Anchor Logic: Direct to section or Home if missing
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link && link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                const targetId = link.getAttribute('href');
+                if (targetId === '#') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) {
+                    e.preventDefault();
+                    // Fallback to home if section missing
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        });
+
+        function switchAuthTab(type) {
+            document.getElementById('tab-login').classList.toggle('active', type === 'login');
+            document.getElementById('tab-register').classList.toggle('active', type === 'register');
+            document.getElementById('form-login').style.display = type === 'login' ? 'block' : 'none';
+            document.getElementById('form-register').style.display = type === 'register' ? 'block' : 'none';
+            document.getElementById('form-forgot').style.display = type === 'forgot' ? 'block' : 'none';
+            document.querySelector('.auth-modal-tabs').style.display = type === 'forgot' ? 'none' : 'flex';
+            if (type === 'forgot' && typeof goModalStep === 'function') goModalStep('forgot');
+        }
+
+        async function handleModalLogin() {
+            const email = document.getElementById('modal-login-email').value;
+            const password = document.getElementById('modal-login-password').value;
+            const btn = document.getElementById('modal-login-submit');
+            
+            btn.disabled = true;
+            const originalText = btn.textContent;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Signing in...';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/login', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({email, password})
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    if (data.user) {
+                        localStorage.setItem('user_id', data.user.id);
+                        localStorage.setItem('full_name', data.user.full_name);
+                        localStorage.setItem('email', data.user.email);
+                    }
+                    btn.innerHTML = '<i class="fas fa-check"></i> Welcome back!';
+                    btn.style.background = '#059669';
+                    setTimeout(() => window.location.href = 'dashboard', 800);
+                } else {
+                    alert(data.message || 'Login failed.');
+                    btn.disabled = false; btn.textContent = originalText;
+                }
+            } catch (err) {
+                alert('Connection error. Is the backend running?');
+                btn.disabled = false; btn.textContent = originalText;
+            }
+        }
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        async function handleModalRegister() {
+            const name = document.getElementById('modal-reg-name').value;
+            const email = document.getElementById('modal-reg-email').value;
+            const password = document.getElementById('modal-reg-password').value;
+            const confirmPassword = document.getElementById('modal-reg-confirm').value;
+            const btn = document.getElementById('modal-reg-submit');
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.'); return;
+            }
+
+            btn.disabled = true; 
+            const originalText = btn.textContent;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Creating account...';
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/register', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({full_name: name, email, password, confirm_password: confirmPassword})
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Success! Please Sign In.';
+                    btn.style.background = '#059669';
+                    document.getElementById('modal-login-email').value = email;
+                    setTimeout(() => {
+                        switchAuthTab('login');
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 2000);
+                } else {
+                    alert(data.message || 'Registration failed.');
+                    btn.disabled = false; btn.textContent = originalText;
+                }
+            } catch (err) {
+                alert('Connection error. Is the backend running?');
+                btn.disabled = false; btn.textContent = originalText;
+            }
+        }
+
+        let resetEmail = "";
+
+        function goModalStep(step) {
+            document.getElementById('modal-step-forgot').style.display = 'none';
+            document.getElementById('modal-step-verify').style.display = 'none';
+            document.getElementById('modal-step-reset').style.display = 'none';
+            document.getElementById('modal-step-success').style.display = 'none';
+            document.getElementById('modal-step-' + step).style.display = 'block';
+
+            if(step === 'verify') {
+                document.getElementById('modal-otp-subtitle').innerHTML = `Enter the 4-digit code sent to <br><span style="color: var(--primary); font-weight: 800;">${resetEmail || 'your email'}</span>`;
+                startOtpCountdown();
+            } else {
+                clearInterval(otpInterval);
+            }
+        }
+
+        let otpInterval;
+        function startOtpCountdown() {
+            clearInterval(otpInterval);
+            let time = 120; // 2 minutes
+            const display = document.getElementById('modal-otp-timer');
+            const verifyBtn = document.getElementById('btn-modal-verify-otp');
+            const timerWrap = document.getElementById('modal-otp-timer-wrap');
+            
+            verifyBtn.disabled = false;
+            timerWrap.style.opacity = '1';
+            
+            otpInterval = setInterval(() => {
+                let mins = Math.floor(time / 60);
+                let secs = time % 60;
+                display.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                
+                if (time <= 0) {
+                    clearInterval(otpInterval);
+                    display.textContent = "Expired";
+                    verifyBtn.disabled = true;
+                    timerWrap.style.color = '#BE123C';
+                }
+                time--;
+            }, 1000);
+        }
+
+        function moveModalFocus(current, index) {
+            if (current.value.length === 1 && index < 4) {
+                document.querySelectorAll('.modal-otp-input')[index].focus();
+            } else if (current.value.length === 0 && index > 1) {
+                document.querySelectorAll('.modal-otp-input')[index - 2].focus();
+            }
+        }
+
+        async function sendModalOtp() {
+            const emailInput = document.getElementById('modal-otp-email').value;
+            if(!emailInput) return alert('Please enter your email.');
+            
+            const btn = document.getElementById('btn-modal-send-otp');
+            btn.disabled = true; 
+            const originalText = btn.textContent;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            try {
+                const res = await fetch('http://127.0.0.1:5000/forgot-password', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ email: emailInput })
+                });
+                const data = await res.json();
+                if(res.ok) {
+                    resetEmail = emailInput;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+                    btn.style.background = '#059669';
+                    setTimeout(() => {
+                        goModalStep('verify');
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 1000);
+                } else {
+                    alert(data.message || 'Error sending OTP');
+                    btn.disabled = false; btn.textContent = originalText;
+                }
+            } catch(e) { console.error(e); alert('Connection Error.'); btn.disabled = false; btn.textContent = originalText; }
+        }
+
+        async function verifyModalOtp() {
+            const inputs = document.querySelectorAll('.modal-otp-input');
+            let otp = "";
+            inputs.forEach(i => otp += i.value);
+            if(otp.length < 4) return alert('Please enter the 4-digit OTP.');
+
+            const btn = document.getElementById('btn-modal-verify-otp');
+            const originalText = btn.textContent;
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+
+            try {
+                const res = await fetch('http://127.0.0.1:5000/verify-otp', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ email: resetEmail, otp: otp })
+                });
+                const data = await res.json();
+                if(res.ok) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Verified!';
+                    btn.style.background = '#059669';
+                    setTimeout(() => {
+                        goModalStep('reset');
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 1000);
+                } else {
+                    alert(data.message || 'Invalid OTP');
+                    btn.disabled = false; btn.textContent = originalText;
+                }
+            } catch(e) { console.error(e); alert('Connection Error.'); btn.disabled = false; btn.textContent = originalText; }
+        }
+
+        async function resetModalPassword() {
+            const pwd = document.getElementById('modal-new-password').value;
+            const confirmPwd = document.getElementById('modal-confirm-password').value;
+            if(!pwd || !confirmPwd) return alert('Please fill in passwords.');
+            if(pwd !== confirmPwd) return alert('Passwords do not match.');
+
+            const btn = document.getElementById('btn-modal-reset-pwd');
+            const originalText = btn.textContent;
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
+
+            try {
+                const res = await fetch('http://127.0.0.1:5000/reset-password', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ email: resetEmail, new_password: pwd, confirm_password: confirmPwd })
+                });
+                const data = await res.json();
+                if(res.ok) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Password Reset!';
+                    btn.style.background = '#059669';
+                    setTimeout(() => {
+                        goModalStep('success');
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 1500);
+                } else {
+                    alert(data.message || 'Error resetting password');
+                    btn.disabled = false; btn.textContent = originalText;
+                }
+            } catch(e) { console.error(e); alert('Connection Error.'); btn.disabled = false; btn.textContent = originalText; }
+        }
+    </script>
+</body>
+
+</html>

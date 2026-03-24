@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavorShelf | Confirm Product Details</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: #E9F0EC;">
+
+    <div class="app-container">
+        <!-- Modern Sidebar -->
+        <aside class="sidebar">
+            <a href="index" class="sidebar-logo">
+                <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                <span>SavorShelf</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <li class="nav-item"><a href="dashboard" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="products" class="nav-link"><i class="fas fa-shopping-basket"></i> <span>My Products</span></a></li>
+                <li class="nav-item"><a href="scan" class="nav-link active"><i class="fas fa-expand"></i> <span>Scan & Track</span></a></li>
+                <li class="nav-item"><a href="freshness" class="nav-link"><i class="fas fa-chart-line"></i> <span>Analytics</span></a></li>
+                <li class="nav-item"><a href="settings" class="nav-link"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="javascript:void(0)" class="nav-link logout-btn" onclick="app.logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main View -->
+        <main class="main-view" style="padding: 20px 30px; display: flex; justify-content: center; background: #F8FAFC; min-height: 100vh;">
+            <div class="scan-content-wrapper" style="width: 100%; max-width: 950px; padding-bottom: 20px;">
+                
+                <!-- Header -->
+                <header class="anim-card" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; width: 100%;">
+                    <div>
+                        <h1 style="font-size: 26px; font-weight: 800; color: #1e293b; letter-spacing: -0.5px; margin: 0;">Confirm Product Details</h1>
+                        <p style="color: #64748b; font-size: 14px; margin-top: 4px;">Review and complete your product information.</p>
+                    </div>
+                </header>
+
+                <!-- Massive Unified Web Panel -->
+                <div class="anim-card" style="display: flex; background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.04); border: 1px solid #E2E8F0; overflow: hidden; align-items: stretch; width: 100%;">
+                    
+                    <!-- Left Sidebar (Status & Analytics/Info) -->
+                    <div style="flex: 0 0 300px; background: #F8FAFC; padding: 25px; border-right: 1px solid #E2E8F0; display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Detected Expiry Insight -->
+                        <div id="expiry-insight-box">
+                            <h4 style="font-size: 12px; font-weight: 800; color: #64748b; margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 0.8px; display: flex; align-items: center; gap: 6px;">
+                                <i class="far fa-calendar-alt"></i> Expiry Insight
+                            </h4>
+                            
+                            <div id="insight-card" style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px 25px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.02); margin-bottom: 12px;">
+                                <div id="insight-icon" style="background: #FEF2F2; color: #DC2626; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto; font-size: 15px;">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h2 id="insight-title" style="font-size: 16px; font-weight: 800; color: #1e293b; margin: 0 0 6px 0;">Date Unclear</h2>
+                                <p id="insight-desc" style="font-size: 13px; color: #64748b; font-weight: 500; margin: 0; line-height: 1.5;">The scan engine could not confidently capture the expiry timestamp.</p>
+                            </div>
+                        </div>
+
+                        <div style="width: 100%; height: 1px; background: #E2E8F0;"></div>
+
+                        <!-- Scan Previews -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                           <div style="aspect-ratio: 1; background: #eee; border-radius: 8px; overflow: hidden; border: 1px solid #ddd;">
+                                <img id="sm-front-img" style="width: 100%; height: 100%; object-fit: cover;">
+                           </div>
+                           <div style="aspect-ratio: 1; background: #eee; border-radius: 8px; overflow: hidden; border: 1px solid #ddd;">
+                                <img id="sm-expiry-img" style="width: 100%; height: 100%; object-fit: cover;">
+                           </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel (Main Form) -->
+                    <div style="flex: 1; padding: 30px 40px; background: white;">
+                        <div style="display: flex; flex-direction: column; gap: 18px;">
+                            <!-- Input Group -->
+                            <div>
+                                <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase;">Product Name</label>
+                                <input type="text" id="product-name" placeholder="Enter product name" style="width: 100%; padding: 15px 16px; border: 1px solid #E2E8F0; border-radius: 12px; font-size: 14px; font-weight: 600;">
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase;">Category</label>
+                                <input type="text" id="category" placeholder="e.g. Grains, Snacks" style="width: 100%; padding: 15px 16px; border: 1px solid #E2E8F0; border-radius: 12px; font-size: 14px; font-weight: 600;">
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div>
+                                    <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase;">Manufacture Date</label>
+                                    <input type="date" id="mfg-date" style="width: 100%; padding: 15px 16px; border: 1px solid #E2E8F0; border-radius: 12px; font-size: 14px; font-weight: 600;">
+                                </div>
+                                <div>
+                                    <label style="display: block; font-size: 12px; font-weight: 800; color: #9B1C1C; margin-bottom: 6px; text-transform: uppercase;">Expiry Date (Required)</label>
+                                    <input type="date" id="expiry-date" required style="width: 100%; padding: 15px 16px; border: 1px solid #E2E8F0; border-radius: 12px; font-size: 14px; font-weight: 600;">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px; text-transform: uppercase;">Batch / Lot Number</label>
+                                <input type="text" id="lot-number" placeholder="Enter Lot Number" style="width: 100%; padding: 15px 16px; border: 1px solid #E2E8F0; border-radius: 12px; font-size: 14px; font-weight: 600;">
+                            </div>
+
+                            <!-- Storage Type -->
+                            <div>
+                                <label style="display: block; font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 8px; text-transform: uppercase;">Storage Type</label>
+                                <div style="display: flex; gap: 10px;">
+                                    <button class="store-btn active" data-val="Fridge" style="flex: 1; padding: 12px; border-radius: 12px; border: 2px solid #0D614E; background: rgba(13,97,78,0.05); color: #0D614E; font-weight: 800; cursor: pointer;">Fridge</button>
+                                    <button class="store-btn" data-val="Room Temperature" style="flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #E2E8F0; background: white; color: #64748b; font-weight: 700; cursor: pointer;">Pantry</button>
+                                    <button class="store-btn" data-val="Freezer" style="flex: 1; padding: 12px; border-radius: 12px; border: 1px solid #E2E8F0; background: white; color: #64748b; font-weight: 700; cursor: pointer;">Freezer</button>
+                                </div>
+                            </div>
+
+                            <button id="save-btn" onclick="handleSave()" style="width: 100%; padding: 18px; margin-top: 10px; background: #0D614E; color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 30px rgba(13, 97, 78, 0.25);">
+                                Save Product to Shelf <i class="fas fa-check-circle" style="margin-left: 10px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard"><i class="fas fa-th-large"></i></a>
+        <a href="products"><i class="fas fa-shopping-basket"></i></a>
+        <a href="scan" class="active" style="background: var(--primary-gradient); width: 54px; height: 54px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-top: -30px; box-shadow: 0 10px 20px rgba(13, 97, 78, 0.3);"><i class="fas fa-plus"></i></a>
+        <a href="freshness"><i class="fas fa-chart-line"></i></a>
+        <a href="settings"><i class="fas fa-cog"></i></a>
+    </nav>
+
+    <script src="script.js"></script>
+    <script>
+        const API_BASE = "http://127.0.0.1:5000";
+        let capturedData = null;
+        let storageType = "Fridge";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const raw = localStorage.getItem('labeled_scan_data');
+            if (raw) {
+                capturedData = JSON.parse(raw);
+                document.getElementById('sm-front-img').src = capturedData.frontImage;
+                document.getElementById('sm-expiry-img').src = capturedData.expiryImage;
+                populateData();
+            }
+        });
+
+        function populateData() {
+            if (!capturedData) return;
+            const front = capturedData.detectedInfo || {};
+            const expiry = capturedData.detectedExpiry || {};
+            const frontRaw = front.rawText || "";
+            const expiryRaw = expiry.rawText || "";
+
+            // 1. Text Search (Deep Scan Fallback)
+            const findInText = (pattern) => {
+                const combined = (frontRaw + " " + expiryRaw).replace(/\n/g, ' ');
+                const match = combined.match(pattern);
+                return match ? match[1] : null;
+            };
+
+            // 2. Resolve Fields
+            const name = front.item_name || expiry.item_name || findInText(/(?:BRAND|NAME|PRODUCT)\s*[:\-]?\s*([A-Za-z\s]{3,20})/i);
+            if (name) document.getElementById('product-name').value = name.trim();
+
+            const lot = expiry.lot_number || front.lot_number || findInText(/(?:LOT|BATCH|B\s*NO|L\.?N)\s*[:\-]?\s*([A-Za-z0-9\-]{3,15})/i);
+            if (lot) document.getElementById('lot-number').value = lot.trim();
+
+            // 3. Resolve Dates
+            let mfgStr = expiry.mfg_date || front.mfg_date;
+            if (!mfgStr) {
+                // Look for second date in text if only one found
+                const dates = (frontRaw + " " + expiryRaw).match(/\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b/g) || [];
+                if (dates.length > 1) mfgStr = dates[0];
+            }
+            
+            let expStr = expiry.expiry_date || front.expiry_date;
+            if (!expStr) {
+                 const dates = (frontRaw + " " + expiryRaw).match(/\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b/g) || [];
+                 if (dates.length > 0) expStr = dates[dates.length-1];
+            }
+
+            if (mfgStr) {
+                const iso = robustDate(mfgStr);
+                if (iso) document.getElementById('mfg-date').value = iso;
+            }
+
+            if (expStr) {
+                const iso = robustDate(expStr);
+                if (iso) {
+                    document.getElementById('expiry-date').value = iso;
+                    updateInsight("Expiry Detected", "Success! AI extracted the date: " + expStr, "#15803D", "#F0FDF4", "fa-check-circle");
+                } else {
+                    updateInsight("Format Unrecognized", "Found '" + expStr + "' but format is ambiguous.", "#92400E", "#FFFBEB", "fa-info-circle");
+                }
+            }
+        }
+
+        function robustDate(s) {
+            let clean = s.replace(/[^\d./-]/g, '').replace(/[.-]/g, '/');
+            let parts = clean.split('/');
+            if (parts.length < 3) return "";
+            
+            let day, month, year;
+            if (parts[0].length === 4) { // YYYY/MM/DD
+                year = parts[0]; month = parts[1]; day = parts[2];
+            } else {
+                year = parts[2].length === 2 ? "20" + parts[2] : parts[2];
+                day = parts[0].padStart(2, '0');
+                month = parts[1].padStart(2, '0');
+                if (parseInt(month) > 12) [day, month] = [month, day];
+            }
+            const iso = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            return isNaN(new Date(iso).getTime()) ? "" : iso;
+        }
+
+        function updateInsight(title, msg, color, bg, icon) {
+            const card = document.getElementById('insight-card');
+            const iconDiv = document.getElementById('insight-icon');
+            iconDiv.style.background = bg;
+            iconDiv.style.color = color;
+            iconDiv.innerHTML = `<i class="fas ${icon}"></i>`;
+            document.getElementById('insight-title').innerText = title;
+            document.getElementById('insight-desc').innerText = msg;
+        }
+
+        // Storage Toggle
+        document.querySelectorAll('.store-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.store-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.border = '1px solid #E2E8F0';
+                    b.style.background = 'white';
+                    b.style.color = '#64748b';
+                });
+                btn.classList.add('active');
+                btn.style.border = '2px solid #0D614E';
+                btn.style.background = 'rgba(13,97,78,0.05)';
+                btn.style.color = '#0D614E';
+                storageType = btn.dataset.val;
+            });
+        });
+
+        async function handleSave() {
+            const userId = localStorage.getItem('user_id');
+            const name = document.getElementById('product-name').value;
+            const mfg = document.getElementById('mfg-date').value;
+            const exp = document.getElementById('expiry-date').value;
+            const lot = document.getElementById('lot-number').value;
+            const cat = document.getElementById('category').value;
+
+            if (!name || !exp) { alert("Missing required fields!"); return; }
+
+            const btn = document.getElementById('save-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+            const formData = new FormData();
+            formData.append('user_id', userId);
+            formData.append('item_name', name);
+            formData.append('category', cat);
+            formData.append('mfg_date', mfg);
+            formData.append('expiry_date', exp);
+            formData.append('lot_number', lot);
+            formData.append('storage_type', storageType);
+            formData.append('quantity', "1");
+
+            const toBlob = async (url) => { const r = await fetch(url); return r.blob(); };
+            formData.append('front_image', await toBlob(capturedData.frontImage), 'front.jpg');
+            formData.append('expiry_image', await toBlob(capturedData.expiryImage), 'expiry.jpg');
+
+            try {
+                const r = await fetch(`${API_BASE}/add-labeled-product`, { method: 'POST', body: formData });
+                const d = await r.json();
+                if (d.status === 'success') {
+                    localStorage.removeItem('labeled_scan_data');
+                    window.location.href = 'products';
+                } else {
+                    alert(d.message);
+                    btn.disabled = false;
+                    btn.innerHTML = 'Save Product to Shelf';
+                }
+            } catch (e) { alert("Error saving."); btn.disabled = false; }
+        }
+    </script>
+</body>
+</html>

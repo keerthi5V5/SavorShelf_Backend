@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavorShelf | Add Product Details</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-dark: #0D614E;
+            --primary-light: #E9F5EF;
+            --text-dark: #1E293B;
+            --text-gray: #64748B;
+            --border-color: #E2E8F0;
+        }
+
+        body {
+            background-color: #F8FAFC;
+        }
+
+        .main-view {
+            padding: 20px 40px !important;
+            background: #F8FAFC !important;
+        }
+
+        .details-container {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-header h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: var(--text-gray);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .details-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            border: 1px solid #F1F5F9;
+        }
+
+        /* Selected Category Box */
+        .category-info-box {
+            background: #F9FBFC;
+            border: 1px solid #F1F5F9;
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .cat-icon-wrapper {
+            background: #E9F5EF;
+            color: #0D614E;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(13, 97, 78, 0.1);
+        }
+
+        .label-tiny {
+            font-size: 11px;
+            font-weight: 800;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+
+        .cat-name-display {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1E293B;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field-group label {
+            font-size: 11px;
+            font-weight: 800;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-input-wrapper {
+            position: relative;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #F1F5F9;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1E293B;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .custom-input:focus {
+            border-color: #0D614E;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(13, 97, 78, 0.08);
+        }
+
+        .custom-input::placeholder {
+            color: #CBD5E1;
+            font-weight: 500;
+        }
+
+        .input-icon-right {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94A3B8;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .input-action-right {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #CBD5E1;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 14px;
+        }
+
+        .input-action-right:hover {
+            color: #EF4444;
+        }
+
+        /* Storage Selector */
+        .storage-selector {
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+
+        .storage-options-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 12px;
+        }
+
+        .storage-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 700;
+            color: #475569;
+            user-select: none;
+        }
+
+        .storage-item input[type="radio"] {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #CBD5E1;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: 0.2s;
+        }
+
+        .storage-item input[type="radio"]:checked {
+            border-color: #0D614E;
+            background-color: white;
+        }
+
+        .storage-item input[type="radio"]:checked::after {
+            content: "";
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #0D614E;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #0D614E;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(13, 97, 78, 0.15);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            background: #094739;
+            box-shadow: 0 15px 40px rgba(13, 97, 78, 0.25);
+        }
+
+        .submit-btn:disabled {
+            background: #94A3B8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Custom Dropdown with Search */
+        .dropdown-relative { position: relative; }
+        .dropdown-menu-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #F1F5F9;
+            border-radius: 16px;
+            margin-top: 10px;
+            max-height: 350px;
+            overflow-y: hidden; /* Search box is fixed */
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            display: none; /* JS will toggle */
+            flex-direction: column;
+        }
+        
+        .dropdown-search-box {
+            padding: 12px;
+            border-bottom: 1px solid #F1F5F9;
+            background: white;
+            position: sticky;
+            top: 0;
+            border-radius: 16px 16px 0 0;
+            z-index: 2;
+        }
+
+        .dropdown-search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .dropdown-search-input:focus {
+            border-color: #0D614E;
+        }
+
+        .items-scroll-area {
+            overflow-y: auto;
+            flex: 1;
+            padding: 8px;
+            max-height: 280px;
+        }
+
+        .menu-list-item {
+            padding: 12px 16px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #475569;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .menu-list-item:hover {
+            background: #F1F9F7;
+            color: #0D614E;
+        }
+
+        /* Sidebar Fine-tuning */
+        .sidebar {
+            background: #0D614E;
+        }
+        .sidebar-logo span {
+            color: white;
+        }
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .nav-link.active {
+            background: white;
+            color: #0D614E;
+        }
+        .logout-container {
+            margin-top: auto;
+            padding: 20px;
+        }
+        .logout-btn-box {
+            background: #FF5252;
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        .logout-btn-box:hover {
+            background: #E53935;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .main-view {
+                padding: 30px 20px !important;
+            }
+            .storage-options-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="index" class="sidebar-logo">
+                <div class="logo-icon"><i class="fas fa-leaf" style="display: block; color: white;"></i></div>
+                <span>SavorShelf</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard" class="nav-link">
+                        <i class="fas fa-th-large"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products" class="nav-link">
+                        <i class="fas fa-shopping-basket"></i> <span>My Products</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="scan" class="nav-link active">
+                        <i class="fas fa-expand"></i> <span>Scan & Track</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="freshness" class="nav-link">
+                        <i class="fas fa-chart-line"></i> <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings" class="nav-link">
+                        <i class="fas fa-cog"></i> <span>Settings</span>
+                    </a>
+                </li>
+            </nav>
+
+            <div class="logout-container">
+                <a href="javascript:void(0)" class="logout-btn-box" onclick="app.logout()">
+                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main View -->
+        <main class="main-view">
+            <div class="details-container">
+                
+                <div class="page-header">
+                    <h1>Add Product Details</h1>
+                    <p>Fill in the specific details to organize your shelf optimally.</p>
+                </div>
+
+                <div class="details-card">
+                    <!-- Selected Category Box -->
+                    <div class="category-info-box">
+                        <div class="cat-icon-wrapper">
+                            <i class="fas fa-layer-group" id="category-icon"></i>
+                        </div>
+                        <div>
+                            <div class="label-tiny">SELECTED CATEGORY</div>
+                            <div id="display-cat-name" class="cat-name-display">Loading...</div>
+                        </div>
+                    </div>
+
+                    <!-- Main Form -->
+                    <div class="form-wrapper">
+                        <div class="form-grid">
+                            <!-- Select Product -->
+                            <div class="field-group dropdown-relative">
+                                <label>SELECT PRODUCT</label>
+                                <div class="custom-input-wrapper" id="dropdown-trigger" style="cursor: pointer;">
+                                    <input type="text" id="product-val-text" class="custom-input" placeholder="Choose a generic product..." readonly style="cursor: pointer; padding-right: 45px;">
+                                    <i class="fas fa-chevron-down input-icon-right"></i>
+                                </div>
+                                <div class="dropdown-menu-list" id="dropdown-menu" style="display: none; flex-direction: column;">
+                                    <div class="dropdown-search-box">
+                                        <input type="text" id="dropdown-search" class="dropdown-search-input" placeholder="Search products..." autocomplete="off">
+                                    </div>
+                                    <div class="items-scroll-area" id="items-container">
+                                        <!-- Populated via JS -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Custom Name -->
+                            <div class="field-group">
+                                <label>CUSTOM NAME (OPTIONAL)</label>
+                                <div class="custom-input-wrapper">
+                                    <input type="text" id="custom-name" class="custom-input" placeholder="Type custom product name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <!-- Purchase Date -->
+                            <div class="field-group">
+                                <label>PURCHASE DATE</label>
+                                <div class="custom-input-wrapper">
+                                    <input type="date" id="purchase-date" class="custom-input" style="color-scheme: light;">
+                                </div>
+                            </div>
+
+                            <!-- Quantity -->
+                            <div class="field-group">
+                                <label>QUANTITY (OPTIONAL)</label>
+                                <div class="custom-input-wrapper">
+                                    <input type="text" id="quantity" class="custom-input" placeholder="e.g., 5 pieces">
+                                    <i class="far fa-trash-alt input-action-right" onclick="document.getElementById('quantity').value=''"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Storage Type -->
+                        <div class="storage-selector">
+                            <label class="label-tiny" style="color: #475569;">STORAGE TYPE</label>
+                            <div class="storage-options-row">
+                                <label class="storage-item">
+                                    <input type="radio" name="store_pref" value="Room Temperature" checked>
+                                    Room Temp
+                                </label>
+                                <label class="storage-item">
+                                    <input type="radio" name="store_pref" value="Fridge">
+                                    Fridge
+                                </label>
+                                <label class="storage-item">
+                                    <input type="radio" name="store_pref" value="Freezer">
+                                    Freezer
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button class="submit-btn" id="save-btn" onclick="saveProduct()">
+                            Save & Estimate Freshness <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Logic Layer -->
+    <script src="script.js"></script>
+    <script>
+        const productData = {
+            "Fruits": [
+                "Apple", "Banana", "Mango", "Orange", "Grapes", "Strawberry", "Blueberry", "Watermelon", 
+                "Pineapple", "Kiwi", "Peach", "Pear", "Cherry", "Plum", "Papaya", "Pomegranate", 
+                "Lemon", "Lime", "Avocado", "Cantaloupe", "Honeydew Melon", "Raspberry", "Blackberry", 
+                "Apricot", "Grapefruit", "Tangerine", "Dragon Fruit", "Lychee", "Passion Fruit", 
+                "Guava", "Persimmon", "Fig", "Date", "Coconut", "Starfruit", "Mulberry", "Nectarine", 
+                "Quince", "Cranberry", "Boysenberry", "Canary Melon", "Casaba Melon", "Cherimoya", 
+                "Christmas Melon", "Clementine", "Crenshaw Melon", "Currants", "Durian", "Gooseberry", 
+                "Horned Melon", "Jack Fruit", "Jujube", "Kumquat", "Loganberry", "Longan", "Loquat", 
+                "Mamoncillo", "Mangosteen", "Mandarin", "Minneola", "Musk Melon", "Nance", "Blood Orange", 
+                "Prickly (cactus) Pear", "Pommelo", "Pulasan", "Rambutan", "Satsuma", "Soursop", 
+                "Tamarillo", "Tangelo", "Ugli fruit"
+            ],
+            "Vegetables": [
+                "Acorn squash", "Anaheim peppers", "Artichoke", "Ash gourd", "Asparagus", "Beetroot", 
+                "Bitter gourd", "Bottle gourd", "Broad bean", "Broccoli", "Broccoli raab", "Broccolini", 
+                "Brown onion", "Brinjal", "Buttercup squash", "Butternut squash", "Capsicum", "Carrots", 
+                "Cauliflower", "Celeriac", "Chilli", "Cluster bean", "Corn", "Courgettes", "Cow pea", 
+                "Cucumber", "Daikon radish", "Dolichos bean", "Drum stick", "Eggplant", "Elephant foot yam", 
+                "French bean", "Garlic", "Ginger", "Gourds", "Green beans", "Green capsicum", "Green onions", 
+                "Ivy gourd", "Jicama", "Knol khol", "Kohlrabi", "Kumara", "Kumi kumi", "Leeks", 
+                "Lima bean", "Mushrooms", "Okra", "Onion", "Parsnips", "Patty pan squash", "Peas", 
+                "Pointed gourd", "Potato", "Pumpkin", "Purple beans", "Purple carrots", "Purple cauliflower", 
+                "Purple kumara", "Red Radish", "Red kumara", "Red onions", "Red Capsicum", "Ridge gourd", 
+                "Romanesco", "Rutabaga", "Shallots", "Snake gourd", "Snap sugar peas", "Snow peas", 
+                "Spaghetti squash", "Spine gourd", "Sponge gourd", "Squash", "Swede", "Sweet corn", 
+                "Sweet peppers", "Sweet potato", "Tapioca", "Taro", "Tomatillo", "Tomato", "Turnips", 
+                "Water chestnuts", "Wing bean", "Yam", "Yellow carrots", "Zucchini"
+            ],
+            "Leafy Greens": [
+                "Amaranthus", "Baby spinach", "Beet greens", "Bok choy", "Brussels sprouts", 
+                "Butter lettuce", "Celery", "Chard", "Chicory", "Chinese cabbage", "Collard greens", 
+                "Cress", "Curry leaves", "Dandelion greens", "Endive lettuce", "Green cabbage", 
+                "Green leaf lettuce", "Iceberg lettuce", "Kale", "Lettuce", "Mustard greens", 
+                "Napa cabbage", "Puha", "Radicchio", "Red cabbage", "Red leaf lettuce", "Rhubarb", 
+                "Romaine lettuce", "Salad greens", "Savoy cabbage", "Silverbeet", "Spinach", 
+                "Turnip greens", "Watercress", "Whitloof", "Wongbok"
+            ],
+            "Meat & Seafood": [
+                "Chicken Breast", "Chicken Thighs", "Chicken Wings", "Whole Chicken", 
+                "Ground Beef", "Beef Steak", "Beef Roast", "Beef Ribs", "Pork Chops", 
+                "Pork Tenderloin", "Bacon", "Sausage", "Ham", "Ground Pork", "Pork Ribs", 
+                "Turkey Breast", "Ground Turkey", "Lamb Chops", "Lamb Leg", "Ground Lamb", 
+                "Veal", "Duck", "Goose", "Venison", "Bison", "Salmon - Atlantic", 
+                "Salmon - Wild", "Tuna", "Shrimp", "Cod", "Tilapia", "Crab", "Lobster", 
+                "Scallops", "Mussels", "Clams", "Prawns", "Mackerel", "Sardines", "Trout", 
+                "Halibut", "Sea Bass", "Octopus", "Squid", "Catfish", "Swordfish", "Snapper", "Anchovy"
+            ],
+            "Dairy": [
+                "Whole Milk", "2% Milk", "Skim Milk", "1% Milk", "Cheddar Cheese", 
+                "Mozzarella Cheese", "Parmesan Cheese", "Swiss Cheese", "Feta Cheese", 
+                "Gouda Cheese", "Brie Cheese", "Blue Cheese", "Provolone Cheese", 
+                "Monterey Jack Cheese", "Plain Yogurt", "Greek Yogurt", "Vanilla Yogurt", 
+                "Fruit Yogurt", "Salted Butter", "Unsalted Butter", "Heavy Cream", 
+                "Light Cream", "Sour Cream", "Cottage Cheese", "Cream Cheese", "Ricotta", 
+                "Mascarpone", "Paneer", "Halloumi", "Whipped Cream", "Buttermilk", "Kefir", "Ghee"
+            ],
+            "Herbs & Seasonings": [
+                "Salt", "Cassia Bark", "Black Pepper", "Crushed Red Pepper", "Garlic Powder", 
+                "Ginger Powder", "Turmeric Powder", "Saffron", "Allspice", "Chilli Pepper", 
+                "Paprika", "Cinnamon", "Coriander Seeds", "Cumin Powder", "Curry Powder", 
+                "Nutmeg", "Mustard Seed Powder", "Fenugreek", "Anise", "Caraway seed", 
+                "Onion powder", "Cilantro", "Mint", "Parsley", "Dill", "Basil", "Oregano", 
+                "Rosemary", "Chives", "Sage", "Savory", "Thyme", "Tarragon", "Marjoram", 
+                "Chamomile", "Lavender", "Bay Leaves", "Winter Savory", "Chervil", "Stevia", "Lemongrass"
+            ]
+        };
+
+        const catIcons = {
+            "Fruits": "fa-apple-alt",
+            "Vegetables": "fa-leaf",
+            "Leafy Greens": "fa-leaf", 
+            "Meat & Seafood": "fa-drumstick-bite",
+            "Dairy": "fa-cheese",
+            "Herbs & Seasonings": "fa-pepper-hot"
+        };
+
+        let currentCategoryItems = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const category = params.get('category') || 'Fruits';
+            
+            document.getElementById('display-cat-name').textContent = category;
+            const iconEl = document.getElementById('category-icon');
+            iconEl.className = `fas ${catIcons[category] || 'fa-layer-group'}`;
+
+            // Store items for filtering
+            currentCategoryItems = productData[category] || [];
+            
+            // Populate initially
+            renderItems(currentCategoryItems);
+
+            // Toggle Dropdown
+            const trigger = document.getElementById('dropdown-trigger');
+            const menu = document.getElementById('dropdown-menu');
+            trigger.onclick = (e) => {
+                e.stopPropagation();
+                const isVisible = menu.style.display === 'flex';
+                menu.style.display = isVisible ? 'none' : 'flex';
+                if (!isVisible) {
+                    document.getElementById('dropdown-search').focus();
+                }
+            };
+
+            // Search logic
+            const searchInput = document.getElementById('dropdown-search');
+            searchInput.onclick = (e) => e.stopPropagation(); // Don't close when clicking search
+            searchInput.oninput = (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = currentCategoryItems.filter(item => item.toLowerCase().includes(term));
+                renderItems(filtered);
+            };
+
+            // Outside click to close dropdown
+            document.addEventListener('click', () => {
+                menu.style.display = 'none';
+                searchInput.value = '';
+                renderItems(currentCategoryItems); // Reset
+            });
+
+            // Set default date to today
+            document.getElementById('purchase-date').valueAsDate = new Date();
+        });
+
+        function renderItems(items) {
+            const container = document.getElementById('items-container');
+            container.innerHTML = '';
+            
+            if (items.length === 0) {
+                const noItem = document.createElement('div');
+                noItem.className = 'menu-list-item';
+                noItem.style.color = '#94A3B8';
+                noItem.style.textAlign = 'center';
+                noItem.textContent = 'No products found';
+                container.appendChild(noItem);
+                return;
+            }
+
+            items.forEach(p => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'menu-list-item';
+                itemDiv.textContent = p;
+                itemDiv.onclick = (e) => {
+                    e.stopPropagation();
+                    document.getElementById('product-val-text').value = p;
+                    document.getElementById('dropdown-menu').style.display = 'none';
+                    document.getElementById('dropdown-search').value = '';
+                    renderItems(currentCategoryItems);
+                };
+                container.appendChild(itemDiv);
+            });
+        }
+
+        async function saveProduct() {
+            const API_BASE = app.API_BASE || "http://127.0.0.1:5000";
+            const userId = localStorage.getItem('user_id');
+            if (!userId) {
+                alert("Please log in to save products.");
+                window.location.href = 'login';
+                return;
+            }
+
+            const category = document.getElementById('display-cat-name').textContent;
+            const itemName = document.getElementById('product-val-text').value;
+            const customName = document.getElementById('custom-name').value;
+            const purchaseDate = document.getElementById('purchase-date').value;
+            const quantity = document.getElementById('quantity').value;
+            const storageType = document.querySelector('input[name="store_pref"]:checked').value;
+
+            if (!itemName && !customName) {
+                alert("Please select a product or enter a custom name.");
+                return;
+            }
+
+            const btn = document.getElementById('save-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+            try {
+                const response = await fetch(`${API_BASE}/add-unlabeled-product`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        category: category,
+                        item_name: itemName || customName, 
+                        custom_name: customName,
+                        purchase_date: purchaseDate,
+                        quantity: quantity,
+                        storage_type: storageType
+                    })
+                });
+
+                if (response.ok) {
+                    btn.innerHTML = '<i class="fas fa-check-circle"></i> Saved Successfully!';
+                    setTimeout(() => {
+                        window.location.href = 'products'; 
+                    }, 800);
+                } else {
+                    const error = await response.json();
+                    alert(error.message || "Failed to save product.");
+                    btn.disabled = false;
+                    btn.innerHTML = 'Save & Estimate Freshness <i class="fas fa-check"></i>';
+                }
+            } catch (error) {
+                console.error('Error saving product:', error);
+                alert("An error occurred. Please try again.");
+                btn.disabled = false;
+                btn.innerHTML = 'Save & Estimate Freshness <i class="fas fa-check"></i>';
+            }
+        }
+    </script>
+</body>
+</html>

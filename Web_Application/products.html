@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SavorShelf | My Products</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Modern Sidebar -->
+        <aside class="sidebar">
+            <a href="index" class="sidebar-logo">
+                <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+                <span>SavorShelf</span>
+            </a>
+            
+            <nav class="nav-menu">
+                <li class="nav-item"><a href="dashboard" class="nav-link"><i class="fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="products" class="nav-link active"><i class="fas fa-shopping-basket"></i> <span>My Products</span></a></li>
+                <li class="nav-item"><a href="scan" class="nav-link"><i class="fas fa-expand"></i> <span>Scan & Track</span></a></li>
+                <li class="nav-item"><a href="freshness" class="nav-link"><i class="fas fa-chart-line"></i> <span>Analytics</span></a></li>
+                <li class="nav-item"><a href="settings" class="nav-link"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="javascript:void(0)" class="nav-link logout-btn" onclick="app.logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main View -->
+        <main class="main-view">
+            <header class="page-header">
+                <div class="header-title">
+                    <h1>My Products 🧺</h1>
+                    <p>You have <span id="total-count-header">0</span> items across your pantry, fridge, and freezer.</p>
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <div class="glass-card" style="padding: 10px 20px; display: flex; align-items: center; gap: 10px; min-width: 300px;">
+                        <i class="fas fa-search" style="color: var(--text-muted);"></i>
+                        <input type="text" id="product-search" placeholder="Search items..." style="border: none; background: transparent; outline: none; width: 100%; font-weight: 600;">
+                    </div>
+                    <button class="btn-primary" onclick="location.href='scan'" style="background: #0D614E; color: white; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; cursor: pointer;">
+                        <i class="fas fa-plus"></i> Add New
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filters Bar -->
+            <div class="filter-chips" id="category-filters" style="margin-bottom: 30px; display: flex; overflow-x: auto; gap: 10px; padding: 5px;">
+                <div class="category-chip active" data-filter="all"><span>All Items</span> <div class="chip-count" id="count-all">0</div></div>
+                <div class="category-chip" data-filter="Fridge"><span>Fridge</span> <div class="chip-count" id="count-fridge">0</div></div>
+                <div class="category-chip" data-filter="Pantry"><span>Pantry</span> <div class="chip-count" id="count-pantry">0</div></div>
+                <div class="category-chip" data-filter="Freezer"><span>Freezer</span> <div class="chip-count" id="count-freezer">0</div></div>
+                <div class="category-chip" data-filter="fresh"><span>Fresh</span> <div class="chip-count" id="count-fresh">0</div></div>
+                <div class="category-chip" data-filter="soon"><span>Use Soon</span> <div class="chip-count" id="count-soon">0</div></div>
+                <div class="category-chip" data-filter="expired"><span>Expired</span> <div class="chip-count" id="count-expired">0</div></div>
+            </div>
+
+            <div class="product-web-grid" id="product-grid">
+                <!-- Rendered by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Navigation (visible only on mobile) -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard"><i class="fas fa-th-large"></i></a>
+        <a href="products" class="active"><i class="fas fa-shopping-basket"></i></a>
+        <a href="scan" style="background: var(--primary-gradient); width: 54px; height: 54px; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; margin-top: -30px; box-shadow: 0 10px 20px rgba(13, 97, 78, 0.3);"><i class="fas fa-plus"></i></a>
+        <a href="freshness"><i class="fas fa-chart-line"></i></a>
+        <a href="settings"><i class="fas fa-cog"></i></a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
