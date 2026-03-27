@@ -3,9 +3,9 @@
  */
 
 const app = {
-    API_BASE: "http://127.0.0.1:5000",
+    API_BASE: "http://180.235.121.253:8121",
 
-    getFormattedImageUrl: function(pathOrUrl) {
+    getFormattedImageUrl: function (pathOrUrl) {
         if (!pathOrUrl) return `${this.API_BASE}/static/default.jpg`;
         if (pathOrUrl.startsWith('http')) return pathOrUrl;
         const prefix = pathOrUrl.startsWith('/') ? '' : '/';
@@ -19,7 +19,7 @@ const app = {
     ],
 
     // Product state management
-    getProducts: async function() {
+    getProducts: async function () {
         const userId = localStorage.getItem('user_id');
         if (!userId) return this.defaultProducts;
 
@@ -35,7 +35,7 @@ const app = {
         return [];
     },
 
-    removeProduct: async function(id) {
+    removeProduct: async function (id) {
         if (!confirm("Are you sure you want to permanently delete this product?")) return false;
         try {
             const response = await fetch(`${this.API_BASE}/delete-product`, {
@@ -50,7 +50,7 @@ const app = {
         }
     },
 
-    updateProductStatus: async function(id, status) {
+    updateProductStatus: async function (id, status) {
         try {
             const response = await fetch(`${this.API_BASE}/update-item-status`, {
                 method: 'POST',
@@ -64,16 +64,16 @@ const app = {
         }
     },
 
-    logout: function() {
+    logout: function () {
         localStorage.clear();
         window.location.href = '/';
     },
 
     settings: {
-        updateProfile: async function() {
+        updateProfile: async function () {
             const userId = localStorage.getItem('user_id');
             const newName = document.getElementById('input-name').value;
-            
+
             if (!newName) return alert("Name cannot be empty");
 
             try {
@@ -97,7 +97,7 @@ const app = {
             }
         },
 
-        changePassword: async function() {
+        changePassword: async function () {
             const userId = localStorage.getItem('user_id');
             const oldPass = document.getElementById('old-password').value;
             const newPass = document.getElementById('new-password').value;
@@ -136,7 +136,7 @@ const app = {
             }
         },
 
-        deleteAccount: async function() {
+        deleteAccount: async function () {
             const userId = localStorage.getItem('user_id');
             const confirmText = document.getElementById('delete-confirm-input').value;
 
@@ -168,14 +168,14 @@ const app = {
         }
     },
 
-    getSelectedProduct: function() {
+    getSelectedProduct: function () {
         const product = localStorage.getItem('ss_selected_product');
         return product ? JSON.parse(product) : null;
     },
 
     // Get color based on shelf life
-    getStatusColor: function(label) {
-        switch(label) {
+    getStatusColor: function (label) {
+        switch (label) {
             case 'Expired': return '#E53935';
             case 'Use Soon': return '#FF9800';
             case 'Moderate': return '#F59E0B';
@@ -184,10 +184,10 @@ const app = {
     },
 
     // 1. Dashboard Logic
-    initDashboard: async function() {
+    initDashboard: async function () {
         const userId = localStorage.getItem('user_id');
         const fullName = localStorage.getItem('full_name') || "User";
-        
+
         // Update header
         const headerTitle = document.querySelector('.header-title h1');
         if (headerTitle) headerTitle.textContent = `Hello, ${fullName}!`;
@@ -203,7 +203,7 @@ const app = {
                     const expiredCount = summaryDivs[0].querySelector('div');
                     const soonCount = summaryDivs[1].querySelector('div');
                     const freshCount = summaryDivs[2].querySelector('div');
-                    
+
                     if (expiredCount) expiredCount.textContent = data.summary.expired;
                     if (soonCount) soonCount.textContent = data.summary.use_soon;
                     if (freshCount) freshCount.textContent = data.summary.fresh;
@@ -222,7 +222,7 @@ const app = {
                         recentContainer.innerHTML = data.recent_items.slice(0, 4).map(item => {
                             const bg = item.freshnessLabel === 'Expired' ? '#FFF1F2' : (item.freshnessLabel === 'Use Soon' ? '#FFFBEB' : '#F0FDF4');
                             const statusCol = item.freshnessLabel === 'Expired' ? '#E11D48' : (item.freshnessLabel === 'Use Soon' ? '#D97706' : '#15803D');
-                            
+
                             return `
                                 <div style="display: flex; align-items: center; gap: 15px; padding: 15px 20px; background: white; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: 0.2s; cursor: pointer;" onclick="app.viewProductDetail(${item.id})">
                                     <img src="${this.getFormattedImageUrl(item.imageUrl)}" alt="${item.name}" style="width: 45px; height: 45px; border-radius: 12px; object-fit: cover;">
@@ -244,12 +244,12 @@ const app = {
         }
     },
 
-    viewProductDetail: function(id) {
+    viewProductDetail: function (id) {
         location.href = `product-detail?id=${id}`;
     },
 
     // 2. Products Page Logic
-    initProductsPage: async function() {
+    initProductsPage: async function () {
         const grid = document.getElementById('product-grid');
         if (!grid) return;
 
@@ -260,7 +260,7 @@ const app = {
 
             if (data.status === 'success') {
                 const products = data.items;
-                
+
                 // Update counts
                 const totalHeader = document.getElementById('total-count-header');
                 if (totalHeader) totalHeader.textContent = products.length;
@@ -310,7 +310,7 @@ const app = {
         }
     },
 
-    renderProductGrid: function(items) {
+    renderProductGrid: function (items) {
         const grid = document.getElementById('product-grid');
         if (!grid) return;
 
@@ -347,7 +347,7 @@ const app = {
         `).join('');
     },
 
-    initFreshnessPage: async function() {
+    initFreshnessPage: async function () {
         const container = document.querySelector('.product-grid-premium');
         if (!container) return;
 
@@ -358,7 +358,7 @@ const app = {
 
             if (data.status === 'success') {
                 const s = data.summary;
-                
+
                 // Update stats cards
                 if (document.getElementById('peak-freshness-count')) document.getElementById('peak-freshness-count').textContent = s.fresh;
                 if (document.getElementById('use-soon-count')) document.getElementById('use-soon-count').textContent = s.use_soon;
@@ -368,7 +368,7 @@ const app = {
                 const total = s.weekly_consumed + s.weekly_wasted;
                 const consumedPct = total > 0 ? Math.round((s.weekly_consumed / total) * 100) : 100;
                 const wastedPct = total > 0 ? 100 - consumedPct : 0;
-                
+
                 const impactText = document.getElementById('waste-impact-text');
                 if (impactText) {
                     if (total === 0) {
@@ -383,7 +383,7 @@ const app = {
 
                 if (document.getElementById('consumed-pct-text')) document.getElementById('consumed-pct-text').textContent = `Consumed: ${consumedPct}%`;
                 if (document.getElementById('wasted-pct-text')) document.getElementById('wasted-pct-text').textContent = `Wasted: ${wastedPct}%`;
-                
+
                 const progressFill = document.getElementById('waste-progress-fill');
                 if (progressFill) {
                     progressFill.style.width = `${consumedPct}%`;
@@ -394,7 +394,7 @@ const app = {
                 container.innerHTML = data.items.map((item, index) => {
                     const color = this.getStatusColor(item.freshnessLabel);
                     const expiryMsg = item.daysRemaining < 0 ? `Expired ${Math.abs(item.daysRemaining)} days ago` : (item.daysRemaining === 0 ? "Expires Today" : `Expires in ${item.daysRemaining} days`);
-                    
+
                     return `
                         <div class="product-card-premium anim-card d-${index % 5}" data-expiry="${item.daysRemaining <= 0 ? 'today' : 'future'}">
                             <div class="item-header">
@@ -424,7 +424,7 @@ const app = {
         }
     },
 
-    filterInventory: function(type, el) {
+    filterInventory: function (type, el) {
         // Toggle active class on buttons
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
         el.classList.add('active');
@@ -448,7 +448,7 @@ const app = {
         const visibleCards = Array.from(cards).filter(c => c.style.display !== 'none');
         const container = document.querySelector('.product-grid-premium');
         let emptyMsg = document.getElementById('filter-empty-msg');
-        
+
         if (visibleCards.length === 0) {
             if (!emptyMsg) {
                 emptyMsg = document.createElement('div');
@@ -463,7 +463,7 @@ const app = {
         }
     },
 
-    getCategoryEmoji: function(category) {
+    getCategoryEmoji: function (category) {
         const mapping = {
             'Fruits': '🍎',
             'Vegetables': '🥦',
@@ -478,7 +478,7 @@ const app = {
     },
 
     // 3. Product Detail Logic
-    initProductDetails: async function() {
+    initProductDetails: async function () {
         const params = new URLSearchParams(window.location.search);
         const productId = params.get('id');
         if (!productId) {
@@ -496,12 +496,12 @@ const app = {
             if (result.status === 'success') {
                 const product = result.data;
                 const color = this.getStatusColor(product.freshness_label);
-                
+
                 // Populate Details
                 document.title = `SavorShelf | ${product.item_name} Details`;
                 const img = document.getElementById('product-img');
                 if (img) img.src = this.getFormattedImageUrl(product.image_path);
-                
+
                 const nameHeader = document.getElementById('product-name');
                 if (nameHeader) nameHeader.textContent = product.item_name;
 
@@ -510,13 +510,13 @@ const app = {
 
                 const badge = document.getElementById('product-status-badge');
                 if (badge) badge.style.color = color;
-                
+
                 const progPct = document.getElementById('product-progress-pct');
                 if (progPct) {
                     progPct.textContent = `${product.freshness_progress}%`;
                     progPct.style.color = color;
                 }
-                
+
                 const fill = document.getElementById('product-progress-fill');
                 if (fill) {
                     fill.style.background = `linear-gradient(90deg, ${color}, ${color}dd)`;
@@ -538,7 +538,7 @@ const app = {
                     expiryVal.textContent = product.expiry_value || 'N/A';
                     expiryVal.style.color = color;
                 }
-                
+
                 const iconBox = document.getElementById('expiry-icon-box');
                 if (iconBox) {
                     iconBox.style.background = `${color}15`;
@@ -604,7 +604,7 @@ const app = {
 // Initialize based on page
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
-    
+
     // Exact or nearly exact matching to avoid "add-product-details" matching "product-detail" or "products"
     if (path.endsWith('dashboard') || path.includes('dashboard.html')) {
         app.initDashboard();
@@ -618,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
             app.initProductDetails();
         }
     }
-    
+
     // Auth Check (Except index and auth pages)
     const isAuthPage = path === '/' || path.endsWith('index') || path.includes('login') || path.includes('register') || path.includes('forgot-password');
     if (!isAuthPage) {
@@ -642,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (path === '/' || path.includes('index')) {
         const sections = document.querySelectorAll('section, footer');
         const navItems = document.querySelectorAll('.landing-nav .nav-link-item');
-        
+
         if (sections.length > 0 && navItems.length > 0) {
             window.addEventListener('scroll', () => {
                 let current = '';
